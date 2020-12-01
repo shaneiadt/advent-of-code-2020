@@ -1,9 +1,11 @@
 import inputs from './input';
 
-export const findSum = (sumToFind: number) => (numbers: number[]): [number, number] | null => {
+export const findSum = (sumToFind: number) => (numbers: number[]): [number, number, number] | null => {
     for (let x = 0; x <= numbers.length; x++) {
         for (let y = 0; y <= numbers.length; y++) {
-            if (numbers[x] + numbers[y] === sumToFind) return [numbers[x], numbers[y]];
+            for (let z = 0; z <= numbers.length; z++) {
+                if (numbers[x] + numbers[y] + numbers[z] === sumToFind) return [numbers[x], numbers[y], numbers[z]];
+            }
         }
     }
 
@@ -12,4 +14,4 @@ export const findSum = (sumToFind: number) => (numbers: number[]): [number, numb
 
 const numbers = findSum(2020)(inputs);
 
-console.log({ numbers, multiplied: numbers[0] * numbers[1] });
+console.log({ numbers, multiplied: numbers[0] * numbers[1] * numbers[2] });
