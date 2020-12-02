@@ -1,4 +1,5 @@
-export default [["6-10 s", "snkscgszxsssscss"]
+export default [
+    ["6-10 s", "snkscgszxsssscss"]
     , ["6-7 b", "bbbbbxkb"]
     , ["2-4 n", "nnnjn"]
     , ["1-2 j", "jjjj"]
