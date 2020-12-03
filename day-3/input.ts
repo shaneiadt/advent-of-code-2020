@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as readline from 'readline';
 
-export function getInputs(stream: string = './input.txt'): Promise<string[][]> {
-    const input: string[][] = [];
+export function getInputs(stream: string = './input.txt'): Promise<string[]> {
+    const input: string[] = [];
 
     return new Promise((resolve, reject) => {
         try {
@@ -12,7 +12,7 @@ export function getInputs(stream: string = './input.txt'): Promise<string[][]> {
                 terminal: false
             });
 
-            file.on('line', line => input.push(line.split('')));
+            file.on('line', line => input.push(line));
             file.on('close', () => resolve(input));
         } catch (error) {
             console.error(error);
