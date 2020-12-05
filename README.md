@@ -6,3 +6,4 @@ This will be a slog but let's go for it :smile:
 - [Day 2: Password Philosophy](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-2/index.ts) :lock:
 - [Day 3: Toboggan Trajectory](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-3/index.ts) :confounded:
 - [Day 4: Passport Processing](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-4/index.ts) :passport_control:
+- [Day 5: Binary Boarding](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-5/index.ts)
