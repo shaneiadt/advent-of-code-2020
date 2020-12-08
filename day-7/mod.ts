@@ -1,57 +1,56 @@
 import { data, testData } from "./data.ts";
 
-const rules: string[] = testData.split("\n");
+const rules: string[] = data.split("\n");
 
-interface Dictionary {
-  key: string;
-  bags: string[];
+interface Bags {
+  [key: string]: {
+    "types": {
+      [key: string]: number;
+    };
+  };
 }
 
-const dict: Dictionary[] = rules.map((rule) => {
-  let bags = rule.match(/\w+ \w+ bag(s|)/g) || [""];
-  bags = bags.map((bag) => bag.replace("bags", "bag"));
+const bags = rules.reduce((allBags: Bags, rule) => {
+  const mainBagPattern = /(\w*\s\w*)(\sbags)?\s(?:contain)\s/gm;
+  const regExp = mainBagPattern.exec(rule) || [];
+  const [, mainBag] = regExp;
 
-  const mainBag = bags[0];
-  bags.shift();
+  rule
+    .replace(mainBagPattern, "")
+    .replace(".", "")
+    .split(",")
+    .forEach((bag) => {
+      const [, amount, bagType] =
+        /(\d\s)?(\w+ \w+) bag(?:s)?(?:,)?/.exec(bag) ||
+        [];
 
-  return {
-    key: mainBag,
-    bags,
-  };
-});
-
-console.log(dict);
-
-const findEntriesByBag = (dict: (Dictionary | undefined)[]) =>
-  (bag: string) => {
-    return dict.filter((d) => {
-      if (!d) return;
-
-      if (d.bags.includes(bag)) return d;
-    });
-  };
-
-const canContainShinyGoldBag = findEntriesByBag(dict)("shiny gold bag").map((
-  f,
-) => f?.key);
-console.log(dict);
-// console.log(canContainShinyGoldBag);
-
-const num = dict.reduce((total, cur) => {
-  for (const bag of canContainShinyGoldBag) {
-    if (bag) {
-      if (cur?.bags.includes(bag)) {
-        // console.log(cur.key, bag);
-        return total += 1;
+      if (bag !== "no other bags") {
+        if (!allBags[mainBag]) {
+          allBags[mainBag] = {
+            types: {},
+          };
+        }
+        allBags[mainBag].types[bagType] = amount ? parseInt(amount.trim()) : 0;
       }
-    }
-  }
+    });
 
-  return total;
-}, 0);
+  return allBags;
+}, {});
 
-console.log(num);
+let validBags = new Set();
+
+function find(child: string, parent: string) {
+  const children = Object.keys(bags[child]?.types || []);
+
+  if (children.length === 0) return;
+  if (children.includes("shiny gold")) return validBags.add(parent);
+
+  children.forEach((_, i, arr) => find(arr[i], parent));
+}
+
+Object.keys(bags).forEach((_, i, arr) => find(arr[i], arr[i]));
 
 console.log(
   `[Part 1] How many bag colors can eventually contain at least one shiny gold bag?`,
+  validBags.size,
 );

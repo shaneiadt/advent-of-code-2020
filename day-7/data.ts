@@ -10,8 +10,7 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.`;
 
-export const data =
-  `dotted salmon bags contain 2 dark lavender bags, 1 muted red bag, 1 vibrant magenta bag.
+export const data = `dotted salmon bags contain 2 dark lavender bags, 1 muted red bag, 1 vibrant magenta bag.
   vibrant purple bags contain 1 pale cyan bag, 1 dotted lavender bag, 3 striped blue bags, 5 clear magenta bags.
   vibrant fuchsia bags contain 4 posh violet bags, 3 bright aqua bags, 1 light silver bag.
   mirrored purple bags contain 2 dim yellow bags, 4 dim green bags, 3 vibrant beige bags.
