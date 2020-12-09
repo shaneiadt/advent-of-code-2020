@@ -8,3 +8,4 @@ This will be a slog but let's go for it :smile:
 - [Day 4: Passport Processing](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-4/index.ts) :passport_control:
 - [Day 5: Binary Boarding](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-5/index.ts) :airplane:
 - [Day 6: Custom Customs](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-6/mod.ts) :couple:
+- [Day 7: Handy Haversacks](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-7/mod.ts) :baggage_claim:
