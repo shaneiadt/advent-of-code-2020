@@ -50,7 +50,34 @@ function find(child: string, parent: string) {
 
 Object.keys(bags).forEach((_, i, arr) => find(arr[i], arr[i]));
 
+let requiredBags = 0;
+
+const findRequiredBags = (
+  child: string = "shiny gold",
+  count: number = 1,
+): number => {
+  const children = Object.keys(bags[child]?.types || []);
+
+  if (children.length === 0) return requiredBags;
+
+  children.forEach((_, i, arr) => {
+    const currentBagTotal = bags[child].types[arr[i]];
+    const childrenToAdd = count * currentBagTotal;
+
+    requiredBags += childrenToAdd;
+    findRequiredBags(arr[i], childrenToAdd);
+  });
+
+  return requiredBags;
+};
+
+requiredBags = findRequiredBags();
+
 console.log(
   `[Part 1] How many bag colors can eventually contain at least one shiny gold bag?`,
   validBags.size,
+);
+console.log(
+  `[Part 2] How many individual bags are required inside your single shiny gold bag?`,
+  requiredBags,
 );
