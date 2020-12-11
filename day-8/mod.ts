@@ -1,6 +1,12 @@
 import { data, testData } from "./data.ts";
 
-const bootCode: string[] = data.split("\n").map((v) => v.trim());
+const bootCode = data.split("\n").map((instruction) => {
+  let str = instruction.split(" ");
+  return {
+    direction: str[0],
+    value: Number(str[1]),
+  };
+});
 
 enum ValidOperations {
   acc = "acc",
@@ -8,37 +14,67 @@ enum ValidOperations {
   nop = "nop",
 }
 
-let accumulator: number = 0;
-let loop = true;
-let i = 0;
+const replace = {
+  nop: "jmp",
+  jmp: "nop",
+};
 
-let operationsCompleted: { [key: number]: string } = {};
+interface BootCode {
+  direction: string;
+  value: number;
+}
 
-do {
-  const [operation, num] = bootCode[i].split(" ");
+const getAccumulator = (data: BootCode[]) => {
+  let operationsCompleted: number[] = [];
+  let code = data[0];
+  let index = 0;
+  let accumulator = 0;
 
-  operationsCompleted = {
-    ...operationsCompleted,
-    [i]: bootCode[i],
-  };
+  while (code) {
+    if (operationsCompleted.includes(index)) {
+      return { accumulator, failed: true };
+    }
 
-  switch (operation) {
-    case ValidOperations.acc:
-      accumulator = eval(`${accumulator}${num}`);
-      i++;
-      break;
-    case ValidOperations.jmp:
-      i = eval(`${i}${num}`);
-      break;
-    case ValidOperations.nop:
-      i++;
-      break;
+    operationsCompleted = [...operationsCompleted, index];
+    const { direction, value } = code;
+
+    if (direction === ValidOperations.nop) index++;
+    if (direction === ValidOperations.jmp) index += value;
+    if (direction === ValidOperations.acc) {
+      index++;
+      accumulator += value;
+    }
+
+    code = data[index];
+  }
+  return { accumulator, failed: false };
+};
+
+function fixBootCode(data: BootCode[]) {
+  let result = { accumulator: 0, failed: true };
+
+  for (let i = 0; i < data.length; i++) {
+    const bootCopy = [...data];
+
+    if (bootCopy[i].direction === ValidOperations.nop) bootCopy[i] = { ...bootCopy[i], direction: replace.nop };
+    if (bootCopy[i].direction === ValidOperations.jmp) {
+      bootCopy[i] = { ...bootCopy[i], direction: replace.jmp };
+    }
+
+    if (!result.failed) break;
+
+    result = getAccumulator(bootCopy);
   }
 
-  if (operationsCompleted[i]) loop = false;
-} while (loop);
+  return result;
+}
 
 console.log(
   `[Part 1] what value is in the accumulator?`,
-  accumulator,
+  getAccumulator(bootCode).accumulator,
+);
+
+console.log(
+  `[Part 2] What is the value of the accumulator after the program terminates?`,
+  fixBootCode(bootCode).accumulator,
 );
