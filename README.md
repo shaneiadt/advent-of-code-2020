@@ -11,3 +11,4 @@ This will be a slog but let's go for it :smile:
 - [Day 7: Handy Haversacks](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-7/mod.ts) :baggage_claim:
 - [Day 8: Handheld Halting](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-8/mod.ts) :video_game:
 - [Day 9: Encoding Error](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-9/mod.ts) :x:
+- [Day 10: Adapter Array](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-10/mod.ts) :battery:
