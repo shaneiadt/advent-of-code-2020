@@ -1,6 +1,8 @@
-import { data, sample } from "./data.ts";
+import { data, sample, sample2 } from "./data.ts";
 import {
   applyBitMask,
+  applyBitMaskToAddress,
+  getAddressSet,
   getInputs,
   getMask,
   getMemoryAddress,
@@ -46,6 +48,31 @@ function run(program: Program) {
   }
 }
 
+function run2(program: Program) {
+  const inputs: Input[] = getInputs(program.input);
+
+  for (const input of inputs) {
+    const binAddress = toBinary(Number(getMemoryAddress(input.address)));
+    const maskedAddress = applyBitMaskToAddress(getMask(program.mask), binAddress);
+    const addressSet = getAddressSet(maskedAddress);
+
+    let addressArray: any[] = []
+
+    addressSet?.forEach(address => {
+        let decimal = parseInt(address, 2);
+        addressArray.push(decimal);
+    })
+    return addressArray;
+
+    // set?.forEach((s) => {
+    //   memory = {
+    //     ...memory,
+    //     [s]: input.value,
+    //   };
+    // });
+  }
+}
+
 for (const program of programs) {
   run(program);
 }
@@ -55,4 +82,17 @@ const sum = Object.values(memory).reduce((total, val) => total + val);
 console.log(
   "[Part 1] What is the sum of all values left in memory after it completes?",
   sum,
+);
+
+memory = {};
+
+for (const program of programs) {
+  run2(program);
+}
+
+const sum2 = Object.values(memory).reduce((total, val) => total + val);
+
+console.log(
+  "[Part 2] What is the sum of all values left in memory after it completes?",
+  sum2,
 );
