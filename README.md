@@ -15,3 +15,4 @@ This will be a slog but let's go for it :smile:
 - [Day 11: Seating System](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-11/mod.ts) :seat:
 - [Day 12: Rain Risk](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-12/mod.ts) :ship:
 - [Day 13: Shuttle Search](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-13/mod.ts) :bus:
+- [Day 14: Docking Data](https://github.com/shaneiadt/advent-of-code-2020/blob/main/day-14/mod.ts) :mask:
