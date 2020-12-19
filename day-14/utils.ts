@@ -3,6 +3,20 @@ import { Input } from "./interfaces.ts";
 export const toBinary = (integer: number, padding: number = 36): string =>
   integer.toString(2).padStart(padding, "0");
 
+export const decode = (mask: string, address: string): number[] => {
+  let binAddress = toBinary(Number(address));
+  let maskedAddress = applyBitMaskToAddress(mask, binAddress);
+  let addressSet = getAddressSet(maskedAddress);
+  let addressArray: number[] = [];
+
+  addressSet?.forEach((address) => {
+    let decimal = parseInt(address, 2);
+    addressArray.push(decimal);
+  });
+
+  return addressArray;
+};
+
 export const getAddressSet = (maskedAddress: string) => {
   const addressSet = new Set<string>();
   return getAddressUtility(maskedAddress, addressSet);
@@ -79,14 +93,18 @@ export const applyBitMask = (mask: string, value: string): string => {
   return result.join("");
 };
 
-export const applyBitMaskToAddress = (mask: string, address: string): string => {
+export const applyBitMaskToAddress = (
+  mask: string,
+  address: string,
+): string => {
+  const lMask = getMask(mask);
   let result = "";
 
-  for (let i = 0; i < mask.length; i++) {
-    if (mask[i] === "0") {
+  for (let i = 0; i < lMask.length; i++) {
+    if (lMask[i] === "0") {
       result += address[i];
     } else {
-      result += mask[i];
+      result += lMask[i];
     }
   }
 
