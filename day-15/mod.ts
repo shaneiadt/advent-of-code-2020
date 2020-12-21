@@ -2,12 +2,10 @@ import { data, sample } from "./data.ts";
 import { getState, loadStartingNumbers } from "./utils.ts";
 import { State } from "./interfaces.ts";
 
-const MAX_TURNS = 2020;
+const beginGame = (state: State, END_TURN: number): number => {
+  let result = 0;
 
-loadStartingNumbers(1, sample);
-
-const beginGame = (state: State) => {
-  while (state.turn < MAX_TURNS) {
+  while (state.turn < END_TURN) {
     const { memory, next } = state;
 
     state.turn = state.turn + 1;
@@ -18,14 +16,21 @@ const beginGame = (state: State) => {
     } else {
       let arr: number[] = memory?.get(next) || [];
 
-      if (arr.length === 1) arr = [state.turn, arr[0]];
+      arr = [state.turn, arr[0]];
 
-      const diff = arr[0] - arr[1];
-      state.next = diff;
+      memory.set(next, arr);
+      state.next = arr[0] - arr[1];
+      if (state.turn + 1 === END_TURN) {
+        result = state.next;
+      }
     }
   }
+
+  return result;
 };
 
-beginGame(getState());
+loadStartingNumbers(1, data);
 
-console.log(getState());
+const partOne = beginGame(getState(), 2020);
+
+console.log("[Part 1] what will be the 2020th number spoken?", partOne);

@@ -1,6 +1,12 @@
-import { Memory, State } from "./interfaces.ts";
+import { State } from "./interfaces.ts";
 
-const state: State = {
+const startingState: State = {
+  next: 0,
+  turn: 0,
+  memory: new Map(),
+};
+
+let state: State = {
   next: 0,
   turn: 0,
   memory: new Map(),
@@ -8,7 +14,11 @@ const state: State = {
 
 export const getState = (): State => state;
 
+const resetState = () => state = { ...startingState };
+
 export const loadStartingNumbers = (turn: number, list: number[]) => {
+  resetState();
+
   const arr: number[] = [...list];
   arr.pop();
 
