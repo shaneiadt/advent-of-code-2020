@@ -10,20 +10,18 @@ const beginGame = (state: State) => {
   while (state.turn < MAX_TURNS) {
     const { memory, next } = state;
 
-    state.turn++;
+    state.turn = state.turn + 1;
 
     if (!memory.has(next)) {
       state.memory.set(next, [state.turn]);
       state.next = 0;
     } else {
-      const arr: number[] = memory?.get(next) || [];
+      let arr: number[] = memory?.get(next) || [];
 
-      if(arr.length === 1){
+      if (arr.length === 1) arr = [state.turn, arr[0]];
 
-      }
-      // const diff = arr[0] - arr[1];
-
-      // state.next = diff;
+      const diff = arr[0] - arr[1];
+      state.next = diff;
     }
   }
 };

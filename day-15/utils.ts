@@ -17,6 +17,6 @@ export const loadStartingNumbers = (turn: number, list: number[]) => {
     turn++;
   }
 
-  state["turn"] = turn;
+  state["turn"] = arr.length;
   state["next"] = list[list.length - 1];
 };
