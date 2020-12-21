@@ -34,7 +34,7 @@ Deno.test("loadStartingNumbers", () => {
   assert(memory.has(3));
 });
 
-Deno.test("loading & running sample data", () => {
+Deno.test("loading & running sample data for part one", () => {
   loadStartingNumbers(1, sample1);
   assertEquals(beginGame(getState(), 2020), 436);
 
