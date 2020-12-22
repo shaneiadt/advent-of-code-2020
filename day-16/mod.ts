@@ -7,17 +7,16 @@ import {
 import {
   getFields,
   getNearbyTickets,
+  getValidTickets,
   validateTicketsByFields,
 } from "./utils.ts";
 
-const rangeFields = getFields(dataCategories);
-const nearbyTicketsObj = getNearbyTickets(dataNearbyTickets);
-
+const rangeFields = getFields(sampleCategories);
+const nearbyTicketsObj = getNearbyTickets(sampleNearbyTickets);
 const invalidTickets = validateTicketsByFields(nearbyTicketsObj, rangeFields);
+const validTickets = getValidTickets(nearbyTicketsObj, invalidTickets);
 
-console.log(invalidTickets);
-
-// TODO: Filter out all invalid tickets
+console.log(validTickets);
 
 console.log(
   "[Part 1] Consider the validity of the nearby tickets you scanned. What is your ticket scanning error rate?",

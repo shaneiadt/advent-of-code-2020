@@ -33,6 +33,11 @@ export const validator = (ranges: number[][]) =>
     return result;
   };
 
+export const getValidTickets = (
+  tickets: number[][],
+  invalidTickets: number[],
+) => tickets.filter((t) => t.every((t) => !invalidTickets.includes(t)));
+
 export const validateTicketsByFields = (
   tickets: number[][],
   fields: Field[],
