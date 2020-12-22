@@ -1,26 +1,3 @@
-export const sample = {
-  fields: [
-    {
-      name: "class",
-      ranges: [[1, 3], [5, 7]],
-    },
-    {
-      name: "row",
-      ranges: [[6, 11], [33, 44]],
-    },
-    {
-      name: "seat",
-      ranges: [[13, 40], [45, 50]],
-    },
-  ],
-  nearbyTickets: [
-    { digits: [7, 3, 47] },
-    { digits: [40, 4, 50] },
-    { digits: [55, 2, 20] },
-    { digits: [38, 6, 12] },
-  ],
-};
-
 export const sampleCategories = `class: 1-3 or 5-7
 row: 6-11 or 33-44
 seat: 13-40 or 45-50`;
@@ -32,7 +9,7 @@ export const sampleNearbyTickets = `7,3,47
 55,2,20
 38,6,12`;
 
-export const data = `departure location: 47-691 or 713-954
+export const dataCategories = `departure location: 47-691 or 713-954
 departure station: 44-776 or 799-969
 departure platform: 37-603 or 627-953
 departure track: 41-240 or 259-955
@@ -51,13 +28,11 @@ seat: 45-475 or 489-960
 train: 34-317 or 323-968
 type: 47-150 or 159-969
 wagon: 45-261 or 279-955
-zone: 33-879 or 891-952
+zone: 33-879 or 891-952`;
 
-your ticket:
-191,139,59,79,149,83,67,73,167,181,173,61,53,137,71,163,179,193,107,197
+export const dataYourTicket =  [191,139,59,79,149,83,67,73,167,181,173,61,53,137,71,163,179,193,107,197];
 
-nearby tickets:
-235,447,575,80,384,832,799,806,529,624,144,398,176,583,199,169,914,222,828,314
+export const dataNearbyTickets = `235,447,575,80,384,832,799,806,529,624,144,398,176,583,199,169,914,222,828,314
 336,538,772,909,139,848,117,360,684,551,261,813,162,660,660,672,809,939,352,86
 63,509,538,681,226,775,383,301,571,112,105,944,199,355,414,809,474,736,541,567
 924,825,298,655,874,917,451,297,329,295,191,311,737,370,527,677,468,573,172,199
