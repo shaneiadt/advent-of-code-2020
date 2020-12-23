@@ -9,6 +9,16 @@ export const sampleNearbyTickets = `7,3,47
 55,2,20
 38,6,12`;
 
+export const sample2Categories = `class: 0-1 or 4-19
+row: 0-5 or 8-19
+seat: 0-13 or 16-19`;
+
+export const sample2YourTicket = [11,12,13];
+
+export const sample2NearbyTickets = `3,9,18
+15,1,5
+5,14,9`;
+
 export const dataCategories = `departure location: 47-691 or 713-954
 departure station: 44-776 or 799-969
 departure platform: 37-603 or 627-953
