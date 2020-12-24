@@ -44,17 +44,10 @@ export const identityFields = (
 
       for (let z = 0; z < columns.length; z++) {
         const isValid = validator(fields[x].ranges);
-        // console.log(
-        //   columns[y][z],
-        //   "isValid",
-        //   isValid(columns[y][z]),
-        //   "range",
-        //   fields[x].ranges,
-        // );
         flags.push(isValid(columns[y][z]));
       }
       // console.log({ flags });
-      if (flags.filter((flag) => flag).length === fields.length) {
+      if (flags.filter((flag) => flag).length === columns[0].length) {
         if (!fieldsIdentified.has(fields[x].name)) {
           const vals = keys.get(fields[x].name) || [];
           keys.set(fields[x].name, [...vals, y]);
