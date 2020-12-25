@@ -33,30 +33,22 @@ export const identityFields = (
     return obj;
   }, new Map<string, number[]>());
 
-  // console.log(keys);
-
   for (let x = 0; x < fields.length; x++) {
     for (let y = 0; y < columns.length; y++) {
-      // console.log(fields[x].name);
-      // console.log(columns[y]);
-
       const flags: boolean[] = [];
 
       for (let z = 0; z < columns.length; z++) {
         const isValid = validator(fields[x].ranges);
         flags.push(isValid(columns[y][z]));
       }
-      // console.log({ flags });
+
       if (flags.filter((flag) => flag).length === columns[0].length) {
         if (!fieldsIdentified.has(fields[x].name)) {
           const vals = keys.get(fields[x].name) || [];
           keys.set(fields[x].name, [...vals, y]);
-          // console.log("POTENTIALLY => ", fields[x].name, keys);
         }
       }
-      // console.log("");
     }
-    // console.log("");
   }
 
   let leastAmount = columns.length;
@@ -72,8 +64,6 @@ export const identityFields = (
   console.log(kk, " is ", keys.get(kk));
   fieldsIdentified?.set(kk, (keys?.get(kk) || [0])[0]);
   fields = fields.filter((f) => f.name !== kk);
-
-  // console.log(fields);
 
   if (fields.length !== 0) {
     identityFields(columns, fields, fieldsIdentified);
