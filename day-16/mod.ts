@@ -20,8 +20,6 @@ const nearbyTicketsObj = getNearbyTickets(sample2NearbyTickets);
 const invalidTickets = validateTicketsByFields(nearbyTicketsObj, rangeFields);
 const validTickets = getValidTickets(nearbyTicketsObj, invalidTickets);
 
-// console.log(validTickets);
-
 export const identityFields = (
   columns: number[][],
   fields: Field[],
